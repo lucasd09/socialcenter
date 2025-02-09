@@ -1,9 +1,9 @@
 import { DashboardIcon } from "@radix-ui/react-icons";
-import { BarChart } from "lucide-react";
+import { Bot, Video } from "lucide-react";
 import { Icon } from "./components/icon";
 import { Route } from "./lib/types";
 
-const brandName = "Next.js Template";
+const brandName = "Social Center";
 
 export const appConfig = {
   redirectSignInURL: "/dashboard",
@@ -11,7 +11,7 @@ export const appConfig = {
   logo: (
     <div className="h-8 min-w-[40px] pr-2">
       <Icon
-        src={BarChart}
+        src={Bot}
         className="size-full"
       />
     </div>
@@ -29,6 +29,11 @@ export const appConfig = {
       name: "Dashboard",
       path: "/dashboard",
       icon: DashboardIcon,
+    },
+    {
+      name: "Videos",
+      path: "/videos",
+      icon: Video,
     },
   ] satisfies Route[],
 };

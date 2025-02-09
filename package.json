@@ -9,7 +9,8 @@
 		"lint": "next lint",
 		"docker:up": "sudo docker compose up -d",
 		"docker:down": "sudo docker compose down",
-		"codegen": "tsx src/lib/codegen.ts"
+		"codegen": "tsx src/lib/codegen.ts",
+		"studio": "drizzle-kit studio"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.9.1",

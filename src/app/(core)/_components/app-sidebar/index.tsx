@@ -9,7 +9,7 @@ export function AppSidebar() {
   return (
     <Sidebar side="left" variant="floating" collapsible="icon">
       <SidebarHeader>
-        <div className="flex items-center overflow-hidden text-ellipsis whitespace-nowrap">
+        <div className="flex items-center overflow-hidden text-ellipsis whitespace-nowrap gap-1">
           {appConfig.logo}
           {appConfig.brandName}
         </div>

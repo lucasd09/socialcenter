@@ -1,7 +1,16 @@
 #!/usr/bin/env node
 import fs from "node:fs/promises";
 import path from "node:path";
-import { capitalizeFirst, checkFileExists } from "./utils";
+import { capitalizeFirst } from "./utils";
+
+const checkFileExists = async (filePath: string): Promise<boolean> => {
+  try {
+    await fs.access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+};
 
 async function generateFiles() {
   try {
@@ -27,7 +36,7 @@ async function generateFiles() {
       const tableName = `${entityName}sTable`;
 
       // Generate model file
-      const modelContent = `import { ${tableName} } from "@/db/schemas/${entityName}.schema";
+      const modelContent = `import { ${tableName} } from "@/db/schemas/${entityName}s.schema";
 import type { InferInsertModel, InferSelectModel } from "drizzle-orm";
 
 export type ${capitalizeFirst(entityName)} = InferSelectModel<typeof ${tableName}>;
@@ -35,7 +44,7 @@ export type ${capitalizeFirst(entityName)}Insert = InferInsertModel<typeof ${tab
 `;
 
       // Generate service file
-      const serviceContent = `import { ${tableName} } from "@/db/schemas/${entityName}.schema";
+      const serviceContent = `import { ${tableName} } from "@/db/schemas/${entityName}s.schema";
 import { ${capitalizeFirst(entityName)}, ${capitalizeFirst(entityName)}Insert } from "@/models/${entityName}.model";
 import { createService } from "../_base";
 

@@ -9,7 +9,7 @@ export default async function AuthLayout({ children }: PropsWithChildren) {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-t from-background via-background to-accent">
+    <div className="flex items-center min-h-screen bg-gradient-to-r from-purple-500 to-purple-900">
       {children}
     </div>
   );

@@ -5,8 +5,8 @@ import { Icon } from "@/components/icon";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { SocialLoginButtons } from "../_components/social-login-buttons";
 import { SignInForm } from "./sign-in-form";
+import { Logo } from "@/components/logo";
 
 export default function Page() {
   const router = useRouter();
@@ -16,35 +16,36 @@ export default function Page() {
   };
 
   return (
-    <div className="w-full max-w-md p-8 space-y-4">
-      <h2 className="text-3xl font-extrabold text-center">
-        Sign in to your account
-      </h2>
+    <div className="w-full h-screen max-w-xl flex items-center justify-center p-8 bg-background">
+      <div className="w-full max-w-md space-y-6">
+        <Logo className="justify-center" />
+        <h2 className="text-3xl font-extrabold text-center">
+          Sign in to your account
+        </h2>
 
-      <SocialLoginButtons />
+        <SignInForm />
 
-      <SignInForm />
+        <div className="flex justify-between items-center text-sm">
+          <div className="grow">
+            <Link href="/">
+              <Button
+                variant="ghost"
+                className="px-2 gap-2 font-normal"
+              >
+                <Icon src={ArrowLeft} />
+                <p>Go back</p>
+              </Button>
+            </Link>
+          </div>
 
-      <div className="flex justify-between items-center text-sm">
-        <div className="grow">
-          <Link href="/">
-            <Button
-              variant="ghost"
-              className="px-2 gap-2 font-normal"
-            >
-              <Icon src={ArrowLeft} />
-              <p>Go back</p>
-            </Button>
-          </Link>
+          <p>Doesn't have an account?</p>
+          <Button
+            variant={"link"}
+            onClick={handleRedirectSignUp}
+          >
+            Sign up
+          </Button>
         </div>
-
-        <p>Doesn't have an account?</p>
-        <Button
-          variant={"link"}
-          onClick={handleRedirectSignUp}
-        >
-          Sign up
-        </Button>
       </div>
     </div>
   );

@@ -26,3 +26,10 @@ export type Route = {
   path: string;
   icon: RouteIcon;
 };
+
+export type BaseSheetProps = {
+  isOpen: boolean;
+  editId?: number;
+  onSuccess: () => void;
+  onOpenChange: (isOpen: boolean) => void;
+};
