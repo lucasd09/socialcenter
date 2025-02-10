@@ -12,9 +12,15 @@ import { z } from "zod";
 import { getVideoEditData, upsertVideo } from "../../actions";
 import { VIDEO_FORM_ID } from "./consts";
 import { VideoFormProps } from "./types";
+import { TextAreaInput } from "@/components/textarea-input";
+import { imageSchema, videoSchema } from "@/lib/zod-types";
+import { FileInput } from "@/components/file-input";
 
 const videoFormSchema = z.object({
   title: z.string().min(2),
+  description: z.string(),
+  thumb: imageSchema,
+  video: videoSchema
 });
 export type VideoFormSchemaData = z.infer<typeof videoFormSchema>;
 
@@ -57,9 +63,25 @@ export const VideoForm = ({
         >
           <Input
             name="title"
-            placeholder="e.g. Groceries"
             form={form}
             isSkeleton={isFetchingEditVideo}
+          />
+          <TextAreaInput
+            name="description"
+            form={form}
+            isSkeleton={isFetchingEditVideo}
+          />
+          <FileInput
+            name="thumb"
+            form={form}
+            isSkeleton={isFetchingEditVideo}
+            accept="image/*"
+          />
+          <FileInput
+            name="video"
+            form={form}
+            isSkeleton={isFetchingEditVideo}
+            accept="video/*"
           />
         </Form>
       </Sheet.Body>

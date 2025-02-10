@@ -7,6 +7,8 @@ const envSchema = z.object({
   GOOGLE_CLIENT_ID: z.string(),
   GOOGLE_CLIENT_SECRET: z.string(),
   HOST_NAME: z.string(),
+  SUPABASE_STORAGE_URL: z.string(),
+  SUPABASE_ANON_KEY: z.string(),
 });
 
 export let env = {} as Env;

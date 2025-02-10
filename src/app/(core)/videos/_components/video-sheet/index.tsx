@@ -16,9 +16,9 @@ export const VideoSheet = ({
       onOpenChange={onOpenChange}
     >
       <Sheet.Content>
-        <Sheet.Title>{editId ? "Edit" : "New"} Category </Sheet.Title>
+        <Sheet.Title>{editId ? "Edit" : "New"} Video </Sheet.Title>
         <Sheet.Description>
-          Enter the category to organize your transactions
+          Bring your video, thumb and description to upload it to all platforms.
         </Sheet.Description>
 
         <VideoForm

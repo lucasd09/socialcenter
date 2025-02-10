@@ -33,3 +33,15 @@ export type BaseSheetProps = {
   onSuccess: () => void;
   onOpenChange: (isOpen: boolean) => void;
 };
+
+export type UploadStorageProps = {
+  file: File;
+  bucket: string;
+  folder?: string;
+  path?: string;
+};
+
+export type RemoveStorageProps = {
+  bucket: string;
+  url: string;
+};

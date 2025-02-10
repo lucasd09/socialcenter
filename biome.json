@@ -27,6 +27,9 @@
 				"noUselessFragments": "error",
 				"noVoid": "error"
 			},
+			"a11y": {
+				"useMediaCaption": "off"
+			},
 			"correctness": {
 				"noUnreachable": "error",
 				"noUnusedVariables": "error",

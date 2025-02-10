@@ -17,7 +17,7 @@ export const UserNav = async () => {
   return <Sheet.Root>
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <SidebarMenuButton>
+        <SidebarMenuButton className="whitespace-nowrap">
           <Icon
             src={UserCircle2}
             className="size-4"

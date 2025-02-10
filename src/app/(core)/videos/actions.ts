@@ -5,6 +5,7 @@ import { ActionResult } from "@/lib/types";
 import { Video, VideoInsert } from "@/models/video.model";
 import { videoService } from "@/services/video";
 import { VideoFormSchemaData } from "./_components/video-form";
+import { removeFromStorage, uploadFile } from "@/lib/storage";
 
 export const getVideoListData = async (): Promise<ActionResult<Video[]>> => {
   try {
@@ -29,9 +30,23 @@ export const upsertVideo = async (
   try {
     const user = await checkUser();
 
+    const { url: thumbURL } = await uploadFile({
+      bucket: "thumbs",
+      file: data.thumb,
+    });
+
+    const { url: videoURL } = await uploadFile({
+      bucket: "videos",
+      file: data.video,
+    });
+
     const videoInsert: VideoInsert = {
       userId: user.id,
       title: data.title,
+      description: data.description,
+      status: "draft",
+      thumbURL,
+      videoURL,
     };
 
     const video = id
@@ -71,7 +86,15 @@ export const getVideoEditData = async (
 
 export const removeVideo = async (id: number): Promise<ActionResult> => {
   try {
-    await videoService.delete(id);
+    const data = await videoService.delete(id);
+
+    if (data.thumbURL) {
+      await removeFromStorage({ bucket: "thumbs", url: data.thumbURL });
+    }
+
+    if (data.videoURL) {
+      await removeFromStorage({ bucket: "videos", url: data.videoURL });
+    }
 
     return {
       success: true,
