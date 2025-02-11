@@ -4,13 +4,13 @@ import { FieldValues } from "react-hook-form";
 import { FormInputBase } from "../form/components/form-input-base";
 import { FileInputProps, FileInputRef } from "./types";
 import { Icon } from "../icon";
-import { Upload, X } from "lucide-react";
-import { Button } from "../button";
+import { Upload } from "lucide-react";
+import { FilePreview } from "./components/file-preview";
 
 const FileInputBase = <TForm extends FieldValues>(
   {
     className,
-    value,
+    value: baseValue,
     form,
     name,
     description,
@@ -33,7 +33,7 @@ const FileInputBase = <TForm extends FieldValues>(
 
       const id = `${String(name)}-input`
 
-      let preview = null
+      const value = form ? (field?.value ?? "") : baseValue;
 
       const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 
@@ -42,34 +42,23 @@ const FileInputBase = <TForm extends FieldValues>(
         }
 
         const file = e.target.files[0];
-        const fileUrl = URL.createObjectURL(file)
-
-        preview = fileUrl
 
         onChange?.(file);
         field?.onChange(file);
       };
 
       const handleClear = () => {
-        preview = null
         field?.onChange(null)
       }
 
       return (
         <div>
-          {preview ? (
-            <div className="relative mb-4">
-              {accept?.startsWith("video")
-                ? <video src={preview} className="w-full h-64 object-contain rounded-md" controls />
-                : <img src={preview} alt={id} className="w-full h-40 object-contain rounded-md border py-2" />
-              }
-              <Button variant="ghost" size="icon" className="absolute top-2 right-2" onClick={handleClear}>
-                <Icon src={X} className="size-4" />
-              </Button>
-            </div>
+          {value ? (
+            <FilePreview accept={accept} file={value} onClear={handleClear} />
           ) : <div className="relative">
             <input
               type="file"
+              value={value}
               onChange={handleChange}
               ref={ref}
               className="hidden"
